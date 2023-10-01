@@ -18,7 +18,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const Sanitization = [
   body('AGENT_CODE').notEmpty().trim().escape(),
-  body('AGENT_NAME').notEmpty().trim().escape()
 ];
 const basicValidationRule = (field) => body(field).exists().not().isEmpty().trim().escape();
 
