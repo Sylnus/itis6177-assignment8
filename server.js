@@ -31,6 +31,10 @@ const Validation = [
 //define the header
 //});
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
 /**
  * @swagger
  * /agents:
@@ -412,7 +416,15 @@ app.delete('/agents/:AGENT_CODE', (req, res) => {
     });
 });
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+function browserResponse(name, keyword) {
+  return `${name} says ${keyword}.`;
+}
+app.get('/say', (req, res) => {
+  const myName = 'Nihar Shukla';
+  const keyword = req.query.keyword;
+  const result = browserResponse(myName, keyword);
+  res.status(200).send(result);
+});
 //listen
 app.listen(port, () => {
 console.log(`Example app listening at http://localhost:${port}`)
